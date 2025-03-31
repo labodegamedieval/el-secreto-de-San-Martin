@@ -169,3 +169,25 @@ body, html {
 #brujula.acertado {
   border: 2px solid #33ff33;
 }
+
+#mensaje-secreto {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(20, 80, 20, 0.85);
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 12px;
+  border: 2px solid #33ff33;
+  z-index: 200;
+  animation: aparecer 0.5s ease-in;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
