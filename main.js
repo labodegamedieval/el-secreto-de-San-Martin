@@ -47,10 +47,35 @@ podrá descubrir el mensaje que Gonzalo escondió siglos atrás.
   mensaje.classList.remove("oculto");
 
   boton.addEventListener("click", () => {
-    mensaje.classList.add("oculto");
-    // Aquí activaremos la brújula o el siguiente evento
-    console.log("Mensaje aceptado. Activamos siguiente etapa.");
-  });
+  mensaje.classList.add("oculto");
+
+  // Mostrar la brújula visual
+  document.getElementById("brujula").classList.remove("oculto");
+
+  // Activar la escucha del giroscopio
+  if (window.DeviceOrientationEvent) {
+    window.addEventListener("deviceorientationabsolute", updateBrujula, true);
+    window.addEventListener("deviceorientation", updateBrujula, true);
+  } else {
+    alert("Tu dispositivo no admite brújula/giroscopio.");
+  }
+});
+
+function updateBrujula(event) {
+  const alpha = event.alpha; // Dirección en grados
+
+  const brujulaImg = document.getElementById("brujula-img");
+  if (alpha !== null && !isNaN(alpha)) {
+    // Rota la imagen de la brújula
+    brujulaImg.style.transform = `rotate(${-alpha}deg)`;
+
+    // Activar llave si se mira al noreste (por ejemplo, entre 40º y 50º)
+    if (alpha > 40 && alpha < 50) {
+      console.log("¡Has encontrado la dirección secreta!");
+      // Aquí luego mostraremos la llave flotante
+    }
+  }
+}
 
   // Resize
   window.addEventListener('resize', () => {
