@@ -49,8 +49,30 @@ podrá descubrir el mensaje que Gonzalo escondió siglos atrás.
   boton.addEventListener("click", () => {
   mensaje.classList.add("oculto");
 
-  // Mostrar la brújula visual
-  document.getElementById("brujula").classList.remove("oculto");
+  const brujulaDiv = document.getElementById("brujula");
+  brujulaDiv.classList.remove("oculto");
+
+  // iOS necesita permiso explícito
+  if (
+    typeof DeviceOrientationEvent !== "undefined" &&
+    typeof DeviceOrientationEvent.requestPermission === "function"
+  ) {
+    DeviceOrientationEvent.requestPermission()
+      .then(permissionState => {
+        if (permissionState === "granted") {
+          window.addEventListener("deviceorientation", updateBrujula, true);
+          console.log("Permiso de orientación concedido");
+        } else {
+          alert("No se concedió permiso para usar la brújula.");
+        }
+      })
+      .catch(console.error);
+  } else {
+    // Android y navegadores compatibles
+    window.addEventListener("deviceorientation", updateBrujula, true);
+    console.log("Brújula activada sin necesidad de permiso");
+  }
+});
 
   // Activar la escucha del giroscopio
   if (window.DeviceOrientationEvent) {
