@@ -1,0 +1,105 @@
+/* Reset básico */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'MedievalSharp', serif;
+  background-color: #1a1a1a;
+  color: #f0e6d2;
+  overflow: hidden;
+}
+
+/* Contenedor 3D */
+#escena-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Interfaz superpuesta */
+#interfaz {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Mensaje narrativo */
+#mensaje-narrativo {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(34, 34, 34, 0.85);
+  padding: 20px;
+  border: 2px solid #a68b5b;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  pointer-events: auto;
+}
+
+/* Botón medieval */
+#continuar-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #a68b5b;
+  border: none;
+  color: #1a1a1a;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+#continuar-btn:hover {
+  background-color: #c5aa70;
+}
+
+/* Brújula */
+#brujula {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 80px;
+  pointer-events: auto;
+}
+
+#brujula-img {
+  width: 100%;
+  transform: rotate(0deg);
+  transition: transform 0.2s linear;
+}
+
+/* Fragmento de mensaje */
+#fragmento-mensaje {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  border: 2px solid #a68b5b;
+  border-radius: 12px;
+  padding: 15px;
+  width: 70%;
+  max-width: 500px;
+  text-align: center;
+  pointer-events: auto;
+}
+
+#pergamino-img {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.oculto {
+  display: none;
+}
