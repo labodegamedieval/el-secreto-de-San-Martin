@@ -121,3 +121,51 @@ body, html {
 .oculto {
   display: none;
 }
+
+#brujula {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 100px;
+  height: 100px;
+  pointer-events: auto;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  transition: border 0.3s ease;
+}
+
+#brujula-cardinales {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  z-index: 2;
+  pointer-events: none;
+  font-weight: bold;
+  color: #f0e6d2;
+  font-size: 12px;
+}
+
+#brujula-cardinales span {
+  position: absolute;
+}
+
+.n { top: 0; left: 50%; transform: translateX(-50%); }
+.e { top: 50%; right: 0; transform: translateY(-50%); }
+.s { bottom: 0; left: 50%; transform: translateX(-50%); }
+.o { top: 50%; left: 0; transform: translateY(-50%); }
+
+/* Aguja */
+#brujula-img {
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  transform: rotate(0deg);
+  transition: transform 0.2s linear;
+}
+
+/* Brújula activa con borde verde */
+#brujula.acertado {
+  border: 2px solid #33ff33;
+}
