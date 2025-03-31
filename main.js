@@ -1,9 +1,9 @@
 let scene, camera, renderer;
 let clock = new THREE.Clock();
+let llave;
 
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
-let llave;
 
 init();
 animate();
@@ -32,13 +32,17 @@ function init() {
   ground.rotation.x = -Math.PI / 2;
   scene.add(ground);
 
-  // === LLAVE FLOTANTE ===
-  const llaveGeo = new THREE.BoxGeometry(0.5, 0.2, 0.1);
-  const llaveMat = new THREE.MeshStandardMaterial({ color: 0xffd700, emissive: 0xffff66 });
-  llave = new THREE.Mesh(llaveGeo, llaveMat);
-  llave.position.set(0, 1.5, 0);
-  llave.visible = false;
-  scene.add(llave);
+  // === Cargar modelo de llave GLB ===
+  const loader = new THREE.GLTFLoader();
+  loader.load('assets/llave.glb', function (gltf) {
+    llave = gltf.scene;
+    llave.position.set(0, 1.5, 0);
+    llave.scale.set(0.8, 0.8, 0.8);
+    llave.visible = false;
+    scene.add(llave);
+  }, undefined, function (error) {
+    console.error('Error al cargar la llave:', error);
+  });
 
   const mensaje = document.getElementById("mensaje-narrativo");
   const texto = document.getElementById("texto-narrativo");
@@ -91,23 +95,25 @@ function updateBrujula(event) {
     if (alpha > (objetivo - margen) && alpha < (objetivo + margen)) {
       brujulaBox.classList.add("acertado");
       mensajeSecreto.classList.remove("oculto");
-      llave.visible = true;
+      if (llave) llave.visible = true;
     } else {
       brujulaBox.classList.remove("acertado");
       mensajeSecreto.classList.add("oculto");
-      llave.visible = false;
+      if (llave) llave.visible = false;
     }
   }
 }
 
 window.addEventListener("click", function (event) {
+  if (!llave || !llave.visible) return;
+
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
   raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects([llave]);
+  const intersects = raycaster.intersectObject(llave, true);
 
-  if (intersects.length > 0 && llave.visible) {
+  if (intersects.length > 0) {
     const fragmento = document.getElementById("fragmento-mensaje");
     const texto = document.getElementById("texto-fragmento");
     fragmento.classList.remove("oculto");
@@ -118,6 +124,5 @@ window.addEventListener("click", function (event) {
 
 function animate() {
   requestAnimationFrame(animate);
-  const delta = clock.getDelta();
   renderer.render(scene, camera);
 }
