@@ -80,11 +80,17 @@ function updateBrujula(event) {
   const alpha = event.alpha;
 
   const brujulaImg = document.getElementById("brujula-img");
+  const brujulaBox = document.getElementById("brujula");
+
   if (alpha !== null && !isNaN(alpha)) {
     brujulaImg.style.transform = `rotate(${-alpha}deg)`;
 
+    // Activar si se mira entre 40º y 50º
     if (alpha > 40 && alpha < 50) {
       console.log("¡Has encontrado la dirección secreta!");
+      brujulaBox.classList.add("acertado");
+    } else {
+      brujulaBox.classList.remove("acertado");
     }
   }
 }
