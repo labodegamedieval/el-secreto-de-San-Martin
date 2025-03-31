@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>El Enigma de San Martín</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Escenario 3D -->
+  <div id="escena-container"></div>
+
+  <!-- Interfaz del juego -->
+  <div id="interfaz">
+    <div id="mensaje-narrativo" class="oculto">
+      <p id="texto-narrativo"></p>
+      <button id="continuar-btn">Continuar</button>
+    </div>
+
+    <div id="brujula" class="oculto">
+      <img src="brujula.png" alt="Brújula" id="brujula-img" />
+    </div>
+
+    <div id="fragmento-mensaje" class="oculto">
+      <img src="pergamino.png" alt="Pergamino" id="pergamino-img" />
+      <p id="texto-fragmento"></p>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r148/three.min.js"></script>
+  <script src="main.js" type="module"></script>
+</body>
+</html>
