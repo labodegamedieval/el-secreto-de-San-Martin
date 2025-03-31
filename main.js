@@ -81,16 +81,22 @@ function updateBrujula(event) {
 
   const brujulaImg = document.getElementById("brujula-img");
   const brujulaBox = document.getElementById("brujula");
+  const mensajeSecreto = document.getElementById("mensaje-secreto");
 
   if (alpha !== null && !isNaN(alpha)) {
     brujulaImg.style.transform = `rotate(${-alpha}deg)`;
+    document.getElementById("alpha-valor").textContent = alpha.toFixed(1);
 
-    // Activar si se mira entre 40º y 50º
-    if (alpha > 40 && alpha < 50) {
-      console.log("¡Has encontrado la dirección secreta!");
+    // Rango de detección (ajustable al ángulo real que quieras)
+    const objetivo = 0; // Norte real
+    const margen = 10;
+
+    if (alpha > (objetivo - margen) && alpha < (objetivo + margen)) {
       brujulaBox.classList.add("acertado");
+      mensajeSecreto.classList.remove("oculto");
     } else {
       brujulaBox.classList.remove("acertado");
+      mensajeSecreto.classList.add("oculto");
     }
   }
 }
